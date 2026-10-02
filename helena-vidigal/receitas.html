@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Receitas | Helena Vidigal, Nutrição Comportamental</title>
+  <meta name="description" content="Receitas por cenário: 15 minutos, marmita, fim de semana, TPM e sem vontade de cozinhar.">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <!-- Se você juntou o pages2.css dentro do pages.css, apague a linha abaixo -->
+  <link rel="stylesheet" href="css/pages2.css">
+</head>
+
+<body data-page="receitas.html">
+  <site-header></site-header>
+
+  <main>
+
+    <!-- Título da página -->
+    <section class="phead">
+      <div class="wrap">
+        <h1>Receitas por cenário</h1>
+        <p>Filtre pela situação da sua semana e salve as favoritas.</p>
+      </div>
+    </section>
+
+    <!-- Busca, filtros e lista de receitas (a lista é montada pelo JavaScript) -->
+    <section>
+      <div class="wrap">
+
+        <input id="busca" class="find" placeholder="Buscar receita" aria-label="Buscar receita">
+
+        <div class="chips">
+          <button data-cen="todas" aria-pressed="true">Todas</button>
+          <button data-cen="15 minutos" aria-pressed="false">15 minutos</button>
+          <button data-cen="marmita" aria-pressed="false">Marmita</button>
+          <button data-cen="fim de semana" aria-pressed="false">Fim de semana</button>
+          <button data-cen="TPM" aria-pressed="false">TPM</button>
+          <button data-cen="sem vontade" aria-pressed="false">Sem vontade</button>
+          <button id="so-fav" aria-pressed="false">Só favoritas</button>
+        </div>
+
+        <div id="receitas"></div>
+
+        <p class="nota">
+          <small>
+            As calorias são estimativas por porção, calculadas com valores médios de tabelas de
+            composição de alimentos. Elas mudam conforme a marca e a quantidade usada.
+          </small>
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <site-footer></site-footer>
+  <contact-popup></contact-popup>
+  <cookie-bar></cookie-bar>
+
+  <script src="js/components.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/content.js"></script>
+</body>
+
+</html>

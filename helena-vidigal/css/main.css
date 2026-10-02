@@ -1,0 +1,973 @@
+/* ==========================================================
+   main.css — organizado em camadas (da mais geral à mais específica)
+
+   ÍNDICE
+   1. Tokens
+   2. Reset
+   3. Base
+   4. Layout
+   5. Componentes (botões, header, footer, popup, cookies)
+   6. Home (hero, balões, passos, números, ofertas, FAQ, scroll)
+   7. Responsivo
+   8. Acessibilidade
+   9. Tela de abertura (preloader)
+   ========================================================== */
+
+
+/* ---------- 1. TOKENS ----------
+   Cores, fontes e medidas ficam em UM lugar.
+   Mudou aqui, mudou no site todo. */
+:root {
+  /* cores */
+  --olive: #6B7A4B;
+  --cream: #F6EFE3;
+  --terra: #C4674A;
+  --butter: #F2D784;
+  --ink: #2E2A24;
+  --paper: #FFFBF4;
+  --line: #d9cdb8; /* bordas e linhas divisórias */
+
+  /* fontes */
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+
+  /* medidas e animação */
+  --r: 22px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* ENQUADRAMENTO NA TELA
+     A altura útil é o que sobra da janela depois da faixa de vagas
+     e do menu fixo. As seções de destaque usam essa medida como alvo,
+     então funcionam em notebook de janela baixa e em monitor grande.
+     (svh = altura "segura" da janela, que no celular não pula com a barra do navegador) */
+  --h-faixa: 2.16rem;                          /* faixa de vagas (sai da tela ao rolar) */
+  --logo-h: clamp(40px, 8svh, 56px);           /* logo encolhe em janela baixa */
+  --nav-pad: clamp(0.4rem, 1.2svh, 0.9rem);    /* respiro do menu */
+  --h-nav: calc(var(--logo-h) + 2 * var(--nav-pad));
+  --altura-util: calc(100svh - var(--h-faixa) - var(--h-nav));
+  --h-marquee: 2.6rem;                         /* faixa amarela de credenciais */
+  --hero-h: calc(var(--altura-util) - var(--h-marquee));
+  --pad-sec: clamp(1.2rem, 5svh, 4rem);        /* respiro vertical das seções */
+
+  /* altura das fotos de destaque: preenche a altura útil, entre 300 e 760px */
+  --foto-h: clamp(300px, calc(var(--altura-util) - 2 * var(--pad-sec)), 760px);
+}
+
+
+/* ---------- 2. RESET ----------
+   Zera diferenças entre navegadores */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* título nunca fica escondido atrás do menu fixo ao pular para uma seção */
+  scroll-padding-top: calc(var(--h-nav) + 0.5rem);
+}
+
+/* height:auto mantém a proporção original das imagens comuns */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+
+/* ---------- 3. BASE ----------
+   Estilo padrão dos elementos HTML */
+body {
+  font: 400 1rem/1.6 var(--sans);
+  color: var(--ink);
+  background: var(--cream);
+  overflow-x: clip; /* rede de segurança; a causa real da rolagem lateral foi corrigida nos elementos */
+}
+
+/* texto selecionado na cor da marca (antes aparecia o azul padrão do navegador) */
+::selection {
+  background: var(--terra);
+  color: #fff;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+/* títulos consideram largura E altura da janela */
+h1 {
+  font-size: clamp(2rem, min(5.6vw, 9svh), 4.4rem);
+}
+
+h2 {
+  margin-bottom: 1.2rem;
+  font-size: clamp(1.5rem, min(3.6vw, 6.5svh), 2.6rem);
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+p {
+  max-width: 62ch;
+}
+
+
+/* ---------- 4. LAYOUT ----------
+   Container, seções e grids reutilizáveis */
+.wrap {
+  width: min(1140px, 92vw);
+  margin-inline: auto;
+}
+
+main > section {
+  padding: var(--pad-sec) 0;
+  scroll-margin-top: var(--h-nav);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* seções com foto em formato retrato: a coluna da foto tem a largura da
+   própria foto (auto) e o texto ocupa todo o resto.
+   .split--foto   = foto à esquerda
+   .split--foto-r = foto à direita */
+.split--foto {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.split--foto-r {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.dark {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.olive {
+  background: var(--olive);
+  color: var(--paper);
+}
+
+/* FOTOS EM RETRATO: a altura é a altura útil da tela (--foto-h) e a
+   LARGURA vem da altura × --k (proporção largura/altura).
+   --k: .8  = 4:5 (padrão)   |   --k: .75 = 3:4 (capa de e-book)
+   object-fit: cover nunca estica; object-position protege o rosto
+   (foco no terço de cima). Ajuste --foco numa foto específica se precisar. */
+.photo {
+  --k: 0.8;
+  width: min(calc(var(--foto-h) * var(--k)), 100%);
+  height: var(--foto-h);
+  justify-self: center;
+  object-fit: cover;
+  object-position: var(--foco, 50% 22%);
+  border-radius: var(--r) var(--r) 120px var(--r);
+}
+
+/* capa de e-book: proporção 3:4 e foco no centro */
+.photo--capa {
+  --k: 0.75;
+  --foco: 50% 50%;
+}
+
+
+/* ---------- 5. COMPONENTES ---------- */
+
+/* botões */
+.btn {
+  display: inline-block;
+  padding: 0.95rem 1.7rem;
+  border: 0;
+  border-radius: 99px;
+  background: var(--terra);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -8px var(--terra);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: inherit;
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+
+/* barra de progresso de leitura (topo da página) */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: 4px;
+  background: var(--terra);
+  transform: scaleX(0);
+  transform-origin: 0;
+}
+
+
+/* ----- header (gerado por components.js) ----- */
+.strip {
+  padding: 0.4rem;
+  background: var(--olive);
+  color: var(--paper);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--cream) 92%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: var(--nav-pad) 0;
+}
+
+.nav ul {
+  display: flex;
+  gap: clamp(0.8rem, 1.6vw, 1.4rem);
+  padding: 0;
+  list-style: none;
+}
+
+.nav a {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav ul a:hover {
+  color: var(--terra);
+}
+
+.nav a.on {
+  color: var(--terra);
+  font-weight: 700;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none;
+}
+
+.brand span {
+  white-space: nowrap;
+}
+
+.brand small {
+  display: block;
+  color: var(--olive);
+  font: 500 0.72rem/1.3 var(--sans);
+}
+
+.logo {
+  height: var(--logo-h);
+  width: auto;
+}
+
+.logo--xl {
+  height: clamp(100px, 18svh, 200px);
+  margin: 0 auto 1.5rem;
+}
+
+.burger {
+  display: none;
+  border: 0;
+  background: none;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+
+/* ----- footer ----- */
+.foot {
+  padding: 4rem 0 2rem;
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.foot .wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.foot a {
+  display: block;
+  margin: 0.3rem 0;
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.foot a:hover {
+  color: var(--butter);
+  opacity: 1;
+}
+
+.foot small {
+  grid-column: 1 / -1;
+  padding-top: 1.2rem;
+  border-top: 1px solid #ffffff22;
+  opacity: 0.6;
+}
+
+
+/* ----- botão flutuante + popup de contato -----
+   Margens seguras: nunca encosta na borda nem passa da janela,
+   inclusive em celulares com recorte (env safe-area). */
+.fab {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 60;
+  max-width: calc(100% - 2rem);
+  padding: 0.65rem 1.1rem;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px -10px #0006;
+}
+
+/* na home, a faixa amarela fica colada no pé da primeira tela:
+   o botão sobe para não cobrir as credenciais */
+body[data-page="index.html"] .fab {
+  bottom: calc(var(--h-marquee) + 0.8rem);
+}
+
+dialog {
+  width: min(460px, 92vw);
+  max-height: 92svh;
+  margin: auto;
+  padding: 2rem;
+  overflow: auto;
+  border: 0;
+  border-radius: var(--r);
+  background: var(--paper);
+}
+
+dialog::backdrop {
+  background: #2E2A24aa;
+  backdrop-filter: blur(3px);
+}
+
+dialog[open] {
+  animation: pop 0.35s var(--ease);
+}
+
+dialog label {
+  display: block;
+  margin: 0.8rem 0 0.2rem;
+  font-weight: 500;
+}
+
+dialog input,
+dialog select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+dialog input:invalid:not(:placeholder-shown) {
+  border-color: var(--terra);
+}
+
+.err {
+  min-height: 1.2em;
+  color: var(--terra);
+  font-size: 0.85rem;
+}
+
+.x {
+  float: right;
+  border: 0;
+  background: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+
+/* ----- aviso de cookies ----- */
+.cookie {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 70;
+  max-width: min(340px, calc(100% - 2rem));
+  padding: 1.1rem;
+  border-radius: var(--r);
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.9rem;
+}
+
+.cookie button {
+  margin-top: 0.6rem;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+}
+
+
+/* ---------- 6. HOME ---------- */
+
+/* ----- hero -----
+   Hero + faixa amarela = exatamente a altura útil da tela. */
+.hero {
+  display: grid;
+  align-items: center;
+  min-height: var(--hero-h);
+  padding: clamp(0.5rem, 2svh, 1.6rem) 0 !important;
+}
+
+.hero .split {
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, min(5vw, 8.5svh), 4rem);
+}
+
+.hero p {
+  margin: clamp(0.6rem, 2svh, 1rem) 0 clamp(0.9rem, 3svh, 1.5rem);
+  font-size: clamp(0.95rem, 2.4svh, 1.1rem);
+}
+
+.hero .btn {
+  padding: clamp(0.7rem, 1.8svh, 0.95rem) 1.5rem;
+}
+
+.hero .btn + .btn {
+  margin-left: 0.8rem;
+}
+
+/* prato girando: a foto é um círculo de propósito (recorta em círculo).
+   O tamanho é o MAIOR que cabe na coluna E na altura do hero. */
+.plate {
+  position: relative;
+  width: max(240px, min(100%, 720px, calc(var(--hero-h) - 2 * clamp(0.5rem, 2svh, 1.6rem))));
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+.plate img {
+  position: absolute;
+  inset: 10%;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.plate svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--ink);
+  font: 600 13.5px var(--sans);
+  letter-spacing: 0.07em;
+  animation: spin 28s linear infinite;
+}
+
+/* o selo fica DENTRO do prato (antes ficava com right:-2% e vazava para fora) */
+.badge {
+  position: absolute;
+  right: 0;
+  bottom: 8%;
+  padding: 0.6rem 0.9rem;
+  border-radius: 16px;
+  background: var(--butter);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transform: rotate(-6deg);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ----- faixa de credenciais -----
+   ESTÁTICA e centralizada: os 5 títulos aparecem inteiros, sem corte.
+   A fonte e os espaços encolhem junto com a largura da janela.
+   Se a janela for estreita demais, a faixa quebra em 2 linhas
+   (flex-wrap) em vez de cortar o texto. */
+.marquee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--h-marquee);
+  padding: 0.4rem 4vw !important;
+  overflow: hidden;
+  background: var(--butter);
+}
+
+.marquee div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem clamp(0.5rem, 1.1vw, 1.6rem);
+  font: 700 clamp(0.7rem, 1.1vw, 1.05rem) / 1.3 var(--serif);
+  text-align: center;
+}
+
+.marquee span {
+  white-space: nowrap;
+}
+
+/* pontinho terracota entre um título e o próximo */
+.marquee span + span::before {
+  content: "•";
+  margin-right: clamp(0.5rem, 1.1vw, 1.6rem);
+  color: var(--terra);
+}
+
+
+/* ----- "Se alguma dessas frases é sua": arte + conversa de chat -----
+   Esquerda: moldura da arte (4:5) na altura útil da tela.
+   Direita: título + conversa (visitante à esquerda, Helena à direita). */
+.pains {
+  display: grid;
+  align-items: center;
+  min-height: var(--altura-util);
+}
+
+.pains__grid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* moldura: já aparece (creme + contorno + texto) antes de a imagem existir */
+.pains__art {
+  position: relative;
+  width: calc((var(--altura-util) - 2 * var(--pad-sec)) * 0.8);
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 2px var(--line);
+  border-radius: var(--r) var(--r) 140px var(--r);
+}
+
+.pains__art::before {
+  content: "Espaço da arte (4:5)";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  color: var(--olive);
+  font-weight: 500;
+  text-align: center;
+}
+
+.pains__art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.6svh, 1rem);
+}
+
+.chat h2 {
+  margin-bottom: clamp(0.3rem, 1.5svh, 1rem);
+}
+
+.msg {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+  max-width: 100%;
+}
+
+/* a resposta da Helena vem pela direita */
+.msg--h {
+  flex-direction: row-reverse;
+  align-self: flex-end;
+}
+
+/* avatares: paciente (silhueta) e Helena (logo) */
+.av {
+  flex: none;
+  width: clamp(2rem, 5.5svh, 2.8rem);
+  height: clamp(2rem, 5.5svh, 2.8rem);
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 2px var(--line);
+}
+
+.av--p {
+  background: var(--butter) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236B7A4B'%3E%3Ccircle cx='12' cy='9' r='4'/%3E%3Cpath d='M4 21c0-5 4-7 8-7s8 2 8 7z'/%3E%3C/svg%3E") center / 62% no-repeat;
+  box-shadow: none;
+}
+
+.bubble {
+  position: relative;
+  max-width: min(36ch, 100%);
+  padding: clamp(0.6rem, 1.8svh, 1.1rem) clamp(0.9rem, 2vw, 1.4rem);
+  border-radius: 22px 22px 22px 6px;
+  background: var(--butter);
+  font: 600 clamp(0.95rem, 2.5svh, 1.3rem) / 1.3 var(--serif);
+}
+
+/* rabinho do balão: fica DENTRO da área do avatar, não vaza da tela */
+.bubble::after {
+  content: "";
+  position: absolute;
+  left: -8px;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  background: inherit;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.msg--h .bubble {
+  border-radius: 22px 22px 6px 22px;
+  background: var(--olive);
+  color: var(--paper);
+}
+
+.msg--h .bubble::after {
+  left: auto;
+  right: -8px;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+/* as mensagens aparecem uma depois da outra, como numa conversa */
+.chat .reveal {
+  transition-delay: calc(var(--i, 0) * 0.14s);
+}
+
+
+/* ----- passos numerados ----- */
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  counter-reset: s;
+}
+
+.steps::before {
+  content: "";
+  position: absolute;
+  top: 1.6rem;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--butter);
+  transform: scaleX(0);
+  transform-origin: 0;
+  transition: transform 1.6s var(--ease);
+}
+
+.steps.in::before {
+  transform: scaleX(1);
+}
+
+.step {
+  position: relative;
+  padding-top: 4rem;
+}
+
+.step::before {
+  content: counter(s);
+  counter-increment: s;
+  position: absolute;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--butter);
+  font: 700 1.3rem var(--serif);
+}
+
+.step em {
+  color: var(--butter);
+  font-style: normal;
+  font-weight: 700;
+}
+
+
+/* ----- números (página Sobre) ----- */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: 1.6rem 0;
+}
+
+.stats b {
+  display: block;
+  color: var(--terra);
+  font: 700 2.2rem / 1 var(--serif);
+}
+
+
+/* ----- ofertas ----- */
+.offers div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.3rem 2rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid #ffffff33;
+}
+
+.offers b {
+  color: var(--butter);
+  font: 700 1.5rem var(--serif);
+}
+
+.offers span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+
+/* ----- captura de e-mail, FAQ e chamada final ----- */
+.lead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.lead input {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.9rem 1.1rem;
+  border: 0;
+  border-radius: 99px;
+}
+
+details {
+  padding: 1.1rem 0;
+  border-bottom: 2px solid var(--line);
+}
+
+summary {
+  font: 700 1.25rem var(--serif);
+  cursor: pointer;
+}
+
+details p {
+  margin-top: 0.7rem;
+}
+
+.cta {
+  text-align: center;
+}
+
+.cta p {
+  margin: 1rem auto 2rem;
+}
+
+
+/* ----- revelação no scroll -----
+   Só ativa se o JS carregou (classe .js no <html>) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ---------- 7. RESPONSIVO ---------- */
+
+/* menu vira hambúrguer em janelas até 1060px (8 links não cabem em linha) */
+@media (max-width: 1060px) {
+  .burger {
+    display: block;
+  }
+
+  .nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    padding: 1.2rem 4vw;
+    background: var(--cream);
+  }
+
+  .nav ul.open {
+    display: flex;
+  }
+}
+
+/* celular: o "Fale comigo" flutuante já faz o papel do botão do menu */
+@media (max-width: 560px) {
+  .nav .btn {
+    display: none;
+  }
+}
+
+/* telas estreitas: empilha tudo. Aqui a altura deixa de ser alvo
+   (no celular a página rola normalmente). */
+@media (max-width: 820px) {
+  .split,
+  .steps,
+  .hero .split {
+    grid-template-columns: 1fr;
+  }
+
+  .steps::before {
+    display: none;
+  }
+
+  .hero {
+    min-height: 0;
+  }
+
+  .plate {
+    width: min(100%, 420px);
+  }
+
+  /* foto em retrato, centralizada, com a mesma proporção (--k) do desktop */
+  .photo {
+    width: min(100%, 440px);
+    height: auto;
+    aspect-ratio: var(--k);
+    justify-self: center;
+  }
+
+  .pains {
+    min-height: 0;
+  }
+
+  .pains__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pains__art {
+    display: none;
+  }
+
+  /* celular sempre mostra o botão flutuante embaixo, a faixa rola junto com a página */
+  body[data-page="index.html"] .fab {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+
+/* ---------- 8. ACESSIBILIDADE ---------- */
+:focus-visible {
+  outline: 3px solid var(--terra);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ---------- 9. TELA DE ABERTURA (PRELOADER COM O CREME EXATO DA IMAGEM) ---------- */
+
+.preloader-bg {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #F5EFE4 !important; /* creme idêntico ao fundo da imagem/vídeo */
+  z-index: 999999 !important; /* fica por cima de absolutamente tudo */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  transition: opacity 0.6s ease, visibility 0.6s ease !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+.preloader-video {
+  width: 100% !important;
+  max-width: 600px !important; /* tamanho da animação na tela */
+  height: auto !important;
+  display: block !important;
+  border: none !important;
+  outline: none !important;
+  background-color: #F5EFE4 !important;
+}
+
+/* classe de fechamento suave */
+.preloader-bg.fade-out {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
