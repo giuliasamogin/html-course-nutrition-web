@@ -238,28 +238,38 @@ main > section {
   background: var(--olive);
   color: var(--paper);
   font-size: 0.85rem;
+  letter-spacing: 0.02em;
   text-align: center;
+}
+
+.strip strong {
+  color: var(--butter);
+  font-weight: 700;
 }
 
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--cream) 92%, transparent);
+  background: color-mix(in srgb, var(--cream) 94%, transparent);
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
 }
 
 .nav .wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: clamp(1rem, 2vw, 2rem);
   padding: var(--nav-pad) 0;
 }
 
+/* menu: empurrado para a direita, junto do botão */
 .nav ul {
   display: flex;
-  gap: clamp(0.8rem, 1.6vw, 1.4rem);
+  align-items: center;
+  gap: clamp(1rem, 1.8vw, 1.8rem);
+  margin-left: auto;
   padding: 0;
   list-style: none;
 }
@@ -269,21 +279,63 @@ main > section {
   white-space: nowrap;
 }
 
+/* links do menu: linha animada embaixo no hover e na página atual */
+.nav ul a {
+  position: relative;
+  padding: 0.35rem 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav ul a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terra);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+
 .nav ul a:hover {
   color: var(--terra);
 }
 
+.nav ul a:hover::after,
+.nav ul a.on::after {
+  transform: scaleX(1);
+}
+
 .nav a.on {
   color: var(--terra);
-  font-weight: 700;
+  font-weight: 600;
+}
+
+/* botão "Agendar consulta": menor e mais discreto que o .btn padrão */
+.nav .nav-cta {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: none;
+}
+
+.nav .nav-cta:hover {
+  box-shadow: 0 8px 18px -8px var(--terra);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.75rem;
   font-family: var(--serif);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.15;
   text-decoration: none;
@@ -318,36 +370,150 @@ main > section {
 }
 
 
-/* ----- footer ----- */
+/* ----- footer (gerado por components.js, classe SiteFooter) -----
+   3 colunas: marca, consultório e newsletter (Carta da Helena).
+   Embaixo: linha divisória + direitos. */
 .foot {
-  padding: 4rem 0 2rem;
-  background: var(--ink);
-  color: var(--cream);
+  padding: 64px 0 0;
+  background: #2d2a24;
+  color: #d9d3c7;
+  font-size: 15px;
+  line-height: 1.65;
 }
 
-.foot .wrap {
+.foot-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
+  grid-template-columns: 1.3fr 1fr 1.1fr;
+  gap: 48px;
 }
 
-.foot a {
-  display: block;
-  margin: 0.3rem 0;
-  opacity: 0.8;
+.foot p {
+  margin: 0 0 10px;
+}
+
+/* marca */
+.foot-brand h3 {
+  margin: 0 0 12px;
+  font-size: 26px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.foot-brand p {
+  max-width: 34ch;
+  color: #bdb6a8;
+}
+
+/* títulos das colunas */
+.foot-col h3 {
+  margin: 0 0 14px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #d98a73;
+}
+
+/* WhatsApp */
+.foot-wa {
+  display: inline-block;
+  color: #fff;
+  font-weight: 600;
   text-decoration: none;
+  border-bottom: 1px solid #c1634b;
 }
 
-.foot a:hover {
-  color: var(--butter);
-  opacity: 1;
+.foot-wa:hover {
+  color: #d98a73;
 }
 
-.foot small {
+/* newsletter: campo e botão dentro de uma única pílula */
+.foot-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 360px;
+  margin-top: 16px;
+  padding: 5px;
+  background: #fff;
+  border-radius: 999px;
+}
+
+.foot-form:focus-within {
+  box-shadow: 0 0 0 3px rgba(193, 99, 75, 0.5);
+}
+
+.foot-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 14px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  color: #2d2a24;
+  outline: none;
+}
+
+.foot-btn {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #c1634b;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.foot-btn:hover {
+  background: #a9513b;
+}
+
+/* rodapé inferior (com espaço à direita para o botão "Fale comigo") */
+.foot-bottom {
   grid-column: 1 / -1;
-  padding-top: 1.2rem;
-  border-top: 1px solid #ffffff22;
-  opacity: 0.6;
+  margin-top: 16px;
+  padding: 22px 170px 28px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 13px;
+  color: #9d968a;
+}
+
+/* tablet */
+@media (max-width: 900px) {
+  .foot-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .foot-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* celular */
+@media (max-width: 600px) {
+  .foot {
+    padding-top: 48px;
+  }
+
+  .foot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .foot-form {
+    max-width: 100%;
+  }
+
+  .foot-bottom {
+    padding-right: 0;
+    padding-bottom: 88px;
+  }
 }
 
 
@@ -855,8 +1021,18 @@ details p {
     right: 0;
     display: none;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    margin-left: 0;
     padding: 1.2rem 4vw;
     background: var(--cream);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 16px 24px -16px rgba(46, 42, 36, 0.25);
+  }
+
+  /* com o menu escondido, o botão vai para a direita, ao lado do hambúrguer */
+  .nav .nav-cta {
+    margin-left: auto;
   }
 
   .nav ul.open {
@@ -866,7 +1042,7 @@ details p {
 
 /* celular: o "Fale comigo" flutuante já faz o papel do botão do menu */
 @media (max-width: 560px) {
-  .nav .btn {
+  .nav .nav-cta {
     display: none;
   }
 }

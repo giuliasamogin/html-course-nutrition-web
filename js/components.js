@@ -69,8 +69,8 @@ class SiteHeader extends HTMLElement {
     const atual = document.body.dataset.page;
 
     const links = PAGES.map(([href, texto]) => {
-      const classe = href === atual ? 'on' : '';
-      return `<li><a href="${href}" class="${classe}">${texto}</a></li>`;
+      const marca = href === atual ? ' class="on" aria-current="page"' : '';
+      return `<li><a href="${href}"${marca}>${texto}</a></li>`;
     }).join('');
 
     this.innerHTML = `
@@ -90,8 +90,8 @@ class SiteHeader extends HTMLElement {
 
           <ul id="menu">${links}</ul>
 
-          <button class="btn" data-open-contact>Agendar consulta</button>
-          <button class="burger" aria-label="Abrir menu" aria-expanded="false">☰</button>
+          <button class="btn nav-cta" type="button" data-open-contact>Agendar consulta</button>
+          <button class="burger" type="button" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">☰</button>
         </div>
       </nav>`;
 
@@ -106,45 +106,36 @@ class SiteHeader extends HTMLElement {
   }
 }
 
-
 /* ---------- 4. FOOTER ----------
-   Mapa do site, endereço, horário e newsletter (Carta da Helena) */
+   Endereço, horário e newsletter (Carta da Helena) */
 class SiteFooter extends HTMLElement {
   connectedCallback() {
-    const links = PAGES.map(([href, texto]) => `<a href="${href}">${texto}</a>`).join('');
-
     this.innerHTML = `
       <footer class="foot">
-        <div class="wrap">
+        <div class="wrap foot-grid">
 
-          <div>
+          <div class="foot-brand">
             <h3>${SITE.nome}</h3>
             <p>${SITE.sub}. Ciência com acolhimento, sem guerra com a comida.</p>
           </div>
 
-          <div>
-            <h3>Navegue</h3>
-            ${links}
-            <a href="privacidade.html">Privacidade</a>
-          </div>
-
-          <div>
+          <div class="foot-col">
             <h3>Consultório</h3>
             <p>${SITE.end.join('<br>')}</p>
             <p>${SITE.horario}</p>
-            <a href="https://wa.me/${SITE.wa}">WhatsApp ${SITE.tel}</a>
+            <a class="foot-wa" href="https://wa.me/${SITE.wa}">WhatsApp ${SITE.tel}</a>
           </div>
 
-          <div>
+          <div class="foot-col">
             <h3>Carta da Helena</h3>
             <p>Um e-mail por semana, sem spam.</p>
-            <form class="lead js-form">
+            <form class="foot-form js-form">
               <input type="email" required placeholder="seu@email.com" aria-label="E-mail">
-              <button class="btn">Assinar</button>
+              <button class="foot-btn" type="submit">Assinar</button>
             </form>
           </div>
 
-          <small>
+          <small class="foot-bottom">
             © ${new Date().getFullYear()} ${SITE.nome}.
             Projeto fictício para fins didáticos. Endereço ilustrativo.
           </small>

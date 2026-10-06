@@ -17,9 +17,8 @@
    10. Cards que viram (Mito ou Ciência)
    11. Artigos e posts
    12. Leitor de PDF (reader.js)
-   13. Página de erro 404
+   13. Página de erro 404 (layout e imagem)
    14. Acessibilidade (movimento reduzido)
-   15. 404 erro 
    ========================================================== */
 
 
@@ -559,68 +558,65 @@
 
 
 /* ---------- 11. Artigos e posts ---------- */
-
-
 .art p {
   margin-bottom: 1.2rem;
   font-size: 1.15rem;
 }
- 
+
 /* artigo completo: título, subtítulos, listas e referências */
 #artigo h1 {
   max-width: 24ch;
   margin-bottom: 0.6rem;
   font-size: clamp(2.2rem, 5vw, 3.6rem);
 }
- 
+
 #artigo p {
   margin-bottom: 1.2rem;
   font-size: 1.15rem;
 }
- 
+
 #artigo h2 {
   margin: 2.4rem 0 0.8rem;
   font-size: clamp(1.4rem, 3vw, 1.9rem);
 }
- 
+
 #artigo ul,
 #artigo ol {
   max-width: 62ch;
   margin: 0 0 1.4rem;
   padding-left: 1.4rem;
 }
- 
+
 #artigo li {
   margin: 0.5rem 0;
   font-size: 1.1rem;
 }
- 
+
 #artigo .refs li {
   font-size: 0.9rem;
   opacity: 0.85;
 }
- 
+
 #artigo .aviso {
   margin-top: 2rem;
   opacity: 0.75;
 }
- 
+
 .post {
   display: block;
   padding: 1.4rem 0;
   border-top: 2px solid var(--line);
   text-decoration: none;
 }
- 
+
 .post b {
   display: block;
   font: 700 1.5rem var(--serif);
 }
- 
+
 .post:hover b {
   color: var(--terra);
 }
- 
 
 
 /* ---------- 12. Leitor de PDF (js/reader.js) ----------
@@ -803,16 +799,27 @@ body.reader-open .fab {
 }
 
 
-/* ---------- 13. Página de erro 404 ---------- */
+/* ---------- 13. Página de erro 404 ----------
+   Layout centralizado + imagem grande no topo.
+   (Antes estava repetido em 3 blocos; este é o resultado final deles.) */
 .e404 {
   display: grid;
   place-items: center;
   min-height: var(--altura-util);
+  padding: 20px 20px 60px;
   text-align: center;
+}
+
+.e404 .wrap {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .e404 p {
   margin-inline: auto;
+  margin-bottom: 24px;
+  color: #666;
+  font-size: 1.05rem;
 }
 
 .e404__num {
@@ -821,21 +828,49 @@ body.reader-open .fab {
   letter-spacing: -0.04em;
 }
 
+.e404__img-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.e404__img {
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  height: auto; /* mantém a proporção original sem cortar */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
 .e404 h1 {
-  margin: 0.4rem auto 1rem;
-  font-size: clamp(1.7rem, min(4.4vw, 7svh), 3rem);
+  margin: 24px auto 12px;
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  color: #333;
 }
 
 .e404__acoes {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.8rem;
-  margin: 1.8rem auto 1.4rem;
+  gap: 16px;
+  margin: 1.8rem auto 24px;
+}
+
+.e404__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .e404__links a {
   margin: 0 0.4rem;
+  color: #8c6239;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 
@@ -878,101 +913,4 @@ body.reader-open .fab {
   .flip.on .f {
     opacity: 0;
   }
-}
-
-/* ---------- 15. Página de erro 404 ---------- */
-.e404 {
-  display: grid;
-  place-items: center;
-  min-height: var(--altura-util);
-  text-align: center;
-}
-
-.e404 p {
-  margin-inline: auto;
-}
-
-.e404__num {
-  color: var(--terra);
-  font: 700 clamp(5rem, min(22vw, 26svh), 11rem) / 1 var(--serif);
-  letter-spacing: -0.04em;
-}
-
-.e404 h1 {
-  margin: 0.4rem auto 1rem;
-  font-size: clamp(1.7rem, min(4.4vw, 7svh), 3rem);
-}
-
-.e404__acoes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.8rem;
-  margin: 1.8rem auto 1.4rem;
-}
-
-.e404__links a {
-  margin: 0 0.4rem;
-}
-
-/* ---------- Estilização da Página 404 (Imagem Expandida) ---------- */
-.e404 {
-  padding: 20px 20px 60px;
-  text-align: center;
-}
-
-.e404 .wrap {
-  max-width: 1200px; /* Permite que o contêiner se expanda bem na tela */
-  margin: 0 auto;
-}
-
-.e404__img-container {
-  margin-bottom: 24px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.e404__img {
-  width: 100%;
-  max-width: 1100px; /* Aumenta a imagem significativamente */
-  height: auto;      /* Mantém a proporção original sem cortar */
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  display: block;
-}
-
-.e404 h1 {
-  font-family: 'Fraunces', serif;
-  font-size: 2rem;
-  color: #333;
-  margin-top: 24px;
-  margin-bottom: 12px;
-}
-
-.e404 p {
-  color: #666;
-  font-size: 1.05rem;
-  margin-bottom: 24px;
-}
-
-.e404__acoes {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-}
-
-.e404__links {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.e404__links a {
-  color: #8c6239;
-  text-decoration: none;
-  font-weight: 500;
 }
