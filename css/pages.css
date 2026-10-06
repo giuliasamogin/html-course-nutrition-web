@@ -9,6 +9,7 @@
    2. Listas e preços
    3. Formulários e botões
    4. Seletor de cenário
+   4b. Blocos das páginas de conversão (botões, exemplo de relatório, listas)
    5. Linha do tempo
    6. Vagas do mês
    7. Mapa e links
@@ -29,7 +30,7 @@
 
 .phead h1 {
   font-size: clamp(2rem, 4.6vw, 3.4rem);
-  max-width: 20ch;
+  max-width: 24ch;
 }
 
 .phead p {
@@ -129,8 +130,116 @@
   color: var(--ink);
 }
 
+/* no computador, a caixa tem uma altura mínima para a página não "pular"
+   quando você troca de cenário (os quatro textos têm tamanhos parecidos) */
+@media (min-width: 821px) {
+  .scen-out {
+    min-height: 27rem;
+  }
+}
+
+/* conteúdo de cada cenário (montado por js/pages.js) */
+.scen-out h3 {
+  margin-bottom: 0.4rem;
+}
+
+.scen-lead {
+  color: var(--olive);
+  font-weight: 500;
+}
+
+.scen-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.scen-list li {
+  padding: 0.75rem 0;
+  border-top: 2px solid var(--line);
+}
+
+.scen-list b {
+  display: block;
+  font: 700 1.05rem var(--serif);
+}
+
+.scen-tip {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background: var(--butter);
+  font-size: 0.95rem;
+}
+
 .pop {
   animation: pop 0.4s var(--ease);
+}
+
+
+/* ---------- 4b. Blocos novos das páginas de conversão ---------- */
+
+/* linha de botões (cabeçalho da página e chamadas finais) */
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+/* chamada final com dois botões lado a lado */
+.cta .acoes {
+  justify-content: center;
+}
+
+/* exemplo ilustrativo de relatório (raio-x.html) */
+.sample {
+  padding: 1.4rem 1.6rem;
+  border: 2px dashed var(--line);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.sample__tag {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 99px;
+  background: var(--butter);
+  font: 700 0.72rem / 1.4 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sample dl {
+  margin: 0;
+}
+
+.sample dt {
+  margin-top: 0.9rem;
+  font: 700 1.05rem var(--serif);
+}
+
+.sample dd {
+  margin: 0.2rem 0 0;
+}
+
+.sample small {
+  display: block;
+  margin-top: 1.1rem;
+  opacity: 0.75;
+}
+
+/* listas dentro das perguntas expansíveis (Kit SOS e FAQ) */
+details ol,
+details ul:not(.checks) {
+  margin: 0.7rem 0 0;
+  padding-left: 1.3rem;
+}
+
+details li {
+  margin: 0.35rem 0;
 }
 
 

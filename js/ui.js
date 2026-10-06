@@ -104,7 +104,7 @@ const observadorScroll = new IntersectionObserver(entradas => {
     // Remove o observador para que a animação aconteça apenas uma vez por acesso
     observadorScroll.unobserve(entrada.target);
   });
-}, { threshold: 0.25 }); // Dispara quando 25% do elemento estiver visível
+}, { threshold: 0.1 }); // Dispara quando 10% do elemento estiver visível (blocos altos com 25% nunca apareciam)
 
 // Aplica o observador em todas as seções animáveis e contadores cadastrados
 document.querySelectorAll('.reveal, .steps, [data-count]').forEach(elemento => {
@@ -154,10 +154,24 @@ function animarContador(elemento) {
    exibir uma mensagem de sucesso na tela de forma amigável, sem dar recarga.
    ========================================================================== */
 document.querySelectorAll('.js-form').forEach(formulario => {
+
+  // Máscara de telefone nos campos de WhatsApp: (11) 99999-9999
+  formulario.querySelectorAll('input[inputmode="tel"]').forEach(campoTel => {
+    campoTel.addEventListener('input', () => {
+      const digitos = campoTel.value.replace(/\D/g, '').slice(0, 11);
+      campoTel.value = digitos
+        .replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3')
+        .replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+    });
+  });
+
   formulario.addEventListener('submit', evento => {
     evento.preventDefault(); // Impede a página de recarregar
-    
-    // Injeta o texto amigável de confirmação dentro do container do formulário
-    formulario.innerHTML = '<p><strong>Pronto!</strong> Confira seu e-mail em instantes.</p>';
+
+    // Mensagem de confirmação: usa o atributo data-ok do formulário, se existir.
+    // Ex.: <form class="js-form" data-ok="Recebi seu pedido!">
+    const mensagem = formulario.dataset.ok || 'Confira seu e-mail em instantes.';
+    formulario.innerHTML = '<p><strong>Pronto!</strong> </p>';
+    formulario.querySelector('p').append(mensagem); // append de texto: não interpreta HTML
   });
 });

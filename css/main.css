@@ -47,7 +47,9 @@
   --altura-util: calc(100svh - var(--h-faixa) - var(--h-nav));
   --h-marquee: 2.6rem;                         /* faixa amarela de credenciais */
   --hero-h: calc(var(--altura-util) - var(--h-marquee));
-  --pad-sec: clamp(1.2rem, 5svh, 4rem);        /* respiro vertical das seções */
+  /* respiro vertical das seções: o mínimo de 3rem garante que o conteúdo nunca
+     fique "espremido" entre o menu fixo e a seção seguinte, mesmo em janela baixa */
+  --pad-sec: clamp(3rem, 8svh, 5.5rem);
 
   /* altura das fotos de destaque: preenche a altura útil, entre 300 e 760px */
   --foto-h: clamp(300px, calc(var(--altura-util) - 2 * var(--pad-sec)), 760px);
@@ -251,9 +253,11 @@ main > section {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--cream) 94%, transparent);
-  backdrop-filter: blur(10px);
+  /* fundo SÓLIDO: com fundo translúcido, o conteúdo que rola por baixo
+     aparecia "cortado" atrás do menu */
+  background: var(--cream);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 10px 20px -16px rgba(46, 42, 36, 0.45);
 }
 
 .nav .wrap {
@@ -375,7 +379,10 @@ main > section {
    Embaixo: linha divisória + direitos. */
 .foot {
   padding: 64px 0 0;
-  background: #2d2a24;
+  /* mais escuro que a seção .dark e com uma linha terracota no topo:
+     assim o último bloco da página nunca se mistura com o rodapé */
+  background: #1f1c17;
+  border-top: 4px solid var(--terra);
   color: #d9d3c7;
   font-size: 15px;
   line-height: 1.65;
@@ -530,6 +537,15 @@ main > section {
   font-size: 0.92rem;
   white-space: nowrap;
   box-shadow: 0 10px 30px -10px #0006;
+  transition: transform 0.3s var(--ease), opacity 0.3s, box-shadow 0.25s;
+}
+
+/* o botão se recolhe quando a pessoa rola para baixo (para não cobrir o texto)
+   e volta quando ela rola para cima. A classe é aplicada em components.js */
+.fab.fab--hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(150%);
 }
 
 /* na home, a faixa amarela fica colada no pé da primeira tela:
@@ -1032,8 +1048,11 @@ dialog input:invalid:not(:placeholder-shown) {
 
 .plan__price {
   margin-top: 1rem;
-  font: 700 2.1rem / 1.05 var(--serif);
+  /* o tamanho acompanha a largura da janela e o preço nunca quebra em duas
+     linhas (antes "R$ 1.970,00/ano" quebrava no plano anual) */
+  font: 700 clamp(1.5rem, 2vw, 2.1rem) / 1.05 var(--serif);
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .plan__price small {
@@ -1126,6 +1145,11 @@ details p {
   .plans__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.6rem 1.2rem;
+  }
+
+  /* com 2 colunas há espaço de sobra: o preço volta ao tamanho cheio */
+  .plan__price {
+    font-size: 2.1rem;
   }
 }
 

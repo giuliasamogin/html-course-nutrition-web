@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Contato | Helena Vidigal, Nutrição Comportamental</title>
-  <meta name="description" content="Endereço, horário e contato do consultório da nutricionista Helena Vidigal em Osasco.">
+  <meta name="description" content="Endereço, horário e WhatsApp do consultório da nutricionista Helena Vidigal em Osasco. Atendimento presencial e online para todo o Brasil.">
 
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,17 +28,22 @@
     <!-- Cabeçalho da Página -->
     <section class="phead">
       <div class="wrap">
-        <h1>Vamos conversar?</h1>
-        <p>Atendimento presencial em Osasco e online para todo o Brasil.</p>
+        <h1>Fale com a Helena.</h1>
+        <p>Atendimento presencial em Osasco e online para todo o Brasil. A resposta às mensagens chega em até 1 dia útil. Se você quer começar, o caminho mais direto é o Raio-X.</p>
+
+        <div class="acoes">
+          <a class="btn" href="raio-x.html">Fazer meu Raio-X</a>
+          <a class="btn btn--ghost" href="https://wa.me/5511900000000">Chamar no WhatsApp</a>
+        </div>
       </div>
     </section>
 
-    <!-- Informações do Consultório, Foto da Dra e Mapa -->
+    <!-- Informações do Consultório, Foto da Helena e Mapa -->
     <section>
       <div class="wrap">
-        <!-- Grid principal dividindo as Informações e a Foto da Dra. -->
+        <!-- Grid principal dividindo as Informações e a Foto -->
         <div class="split split--foto" style="align-items: center; margin-bottom: 2.5rem;">
-          
+
           <!-- Informações de Contato e Horários -->
           <div>
             <h2>Consultório</h2>
@@ -60,8 +65,8 @@
             </p>
           </div>
 
-          <!-- Foto da Dra. Helena ao lado -->
-          <img class="photo reveal" src="midia/img/helena/atendendo.jpeg" alt="Dra. Helena Vidigal no consultório">
+          <!-- Foto da Helena ao lado -->
+          <img class="photo reveal" src="midia/img/helena/atendendo.jpeg" alt="Helena Vidigal no consultório">
 
         </div>
 
@@ -73,21 +78,48 @@
       </div>
     </section>
 
+    <!-- Dúvidas antes de falar com a Helena -->
+    <section class="plans">
+      <div class="wrap">
+        <h2>Antes de escrever</h2>
+
+        <details>
+          <summary>Qual é a melhor forma de começar?</summary>
+          <p>Pelo Raio-X: 14 dias de registro pelo celular, um relatório escrito e uma sessão de 50 minutos. Custa R$ 147,00 e é abatido do Programa se você seguir em até 7 dias depois da sessão. <a href="raio-x.html">Ver como funciona</a>.</p>
+        </details>
+
+        <details>
+          <summary>Posso ser atendida online?</summary>
+          <p>Sim. As sessões são por vídeo e o acompanhamento é por áudio no WhatsApp. O método é o mesmo do atendimento presencial em Osasco.</p>
+        </details>
+
+        <details>
+          <summary>Quanto custa cada plano?</summary>
+          <p>Raio-X: R$ 147,00. Programa de 90 dias: R$ 1.497,00 ou 3x de R$ 499,00. Acompanhamento mensal: R$ 197,00 por mês. Anual: R$ 1.970,00 por ano. Turma de 8 pessoas: R$ 697,00. <a href="programa.html">Ver o Programa</a>.</p>
+        </details>
+
+        <details>
+          <summary>Ainda não sei se é para mim. O que faço?</summary>
+          <p>Faça o <a href="quiz.html">quiz de 6 perguntas</a> ou leia o <a href="ebook.html">e-book gratuito</a>. Se preferir conversar antes, deixe seu contato abaixo.</p>
+        </details>
+      </div>
+    </section>
+
     <!-- Seção de Leads / Formulário -->
     <section class="dark">
       <div class="wrap split">
         <div>
-          <h2>Prefere que eu te chame?</h2>
-          <p>Deixe seus dados e eu respondo em até 1 dia útil.</p>
+          <h2>Prefere que a Helena te chame?</h2>
+          <p>Deixe seu nome e seu WhatsApp, e escolha como prefere ser atendida. A resposta chega em até 1 dia útil.</p>
         </div>
 
         <div class="fld">
-          <form class="fld js-form">
+          <form class="fld js-form" data-ok="Recebi a sua mensagem. A Helena responde no WhatsApp em até 1 dia útil.">
             <label for="c-nome">Nome</label>
-            <input id="c-nome" required minlength="3">
+            <input id="c-nome" required minlength="3" autocomplete="name">
 
             <label for="c-tel">WhatsApp</label>
-            <input id="c-tel" required inputmode="tel" placeholder="(11) 99999-9999">
+            <input id="c-tel" required inputmode="tel" placeholder="(11) 99999-9999" autocomplete="tel">
 
             <label for="c-aten">Atendimento</label>
             <select id="c-aten">

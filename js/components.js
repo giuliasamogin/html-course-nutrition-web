@@ -31,7 +31,8 @@ const SITE = {
     'Av. dos Autonomistas, 964, Vila Yara, Osasco, SP'
   ],
   horario: 'Seg a sex, 8h às 19h · Sáb, 8h às 12h',
-  vagas: [5, 8] // [restantes, total] do mês
+  vagas: [5, 8], // [restantes, total] vagas para começar o Raio-X no mês
+  turma: [5, 8]  // [restantes, total] lugares da Turma no ciclo
 };
 
 const PAGES = [
@@ -90,7 +91,7 @@ class SiteHeader extends HTMLElement {
 
           <ul id="menu">${links}</ul>
 
-          <button class="btn nav-cta" type="button" data-open-contact>Agendar consulta</button>
+          <a class="btn nav-cta" href="raio-x.html">Fazer meu Raio-X</a>
           <button class="burger" type="button" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">☰</button>
         </div>
       </nav>`;
@@ -116,7 +117,8 @@ class SiteFooter extends HTMLElement {
 
           <div class="foot-brand">
             <h3>${SITE.nome}</h3>
-            <p>${SITE.sub}. Ciência com acolhimento, sem guerra com a comida.</p>
+            <p>${SITE.sub} em Osasco e online. Primeiro o diagnóstico de 14 dias, depois o plano.</p>
+            <a class="foot-wa" href="raio-x.html">Fazer meu Raio-X</a>
           </div>
 
           <div class="foot-col">
@@ -152,7 +154,7 @@ class SiteFooter extends HTMLElement {
 class ContactPopup extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <button class="btn fab" data-open-contact>💬 Fale comigo</button>
+      <button class="btn fab" data-open-contact>Fale comigo</button>
 
       <dialog id="contato" aria-labelledby="ct">
         <form method="dialog">
@@ -194,6 +196,24 @@ class ContactPopup extends HTMLElement {
     document.addEventListener('click', (ev) => {
       if (ev.target.closest('[data-open-contact]')) dialog.showModal();
     });
+
+    // o botão "Fale comigo" se recolhe ao rolar para baixo (para não cobrir
+    // o texto) e volta ao rolar para cima, no topo e no fim da página
+    const fab = this.querySelector('.fab');
+    let ultimoY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const descendo = y > ultimoY + 4;
+      const subindo = y < ultimoY - 4;
+      const noTopo = y < 240;
+      const noFim = window.innerHeight + y > document.documentElement.scrollHeight - 320;
+
+      if (noTopo || noFim || subindo) fab.classList.remove('fab--hide');
+      else if (descendo) fab.classList.add('fab--hide');
+
+      ultimoY = y;
+    }, { passive: true });
 
     // clique fora da caixa fecha
     dialog.addEventListener('click', (ev) => {

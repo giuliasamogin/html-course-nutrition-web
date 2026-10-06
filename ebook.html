@@ -1,59 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-    
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>E-book gratuito | Helena Vidigal, Nutrição Comportamental</title>
-        <meta name="description" content="E-book gratuito: Por Que a Dieta Não Durou, um guia comportamental.">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/main.css"><link rel="stylesheet" href="css/pages.css">
-        <link rel="stylesheet" href="css/pages2.css">
-    </head>
-    
-    <body data-page="ebook.html">
-        <site-header></site-header>
-        <main>
-            <section class="phead">
-                <div class="wrap">
-                    <h1>Por Que a Dieta Não Durou</h1>
-                    <p>Um guia curto sobre cinco motivos comportamentais e o que fazer diferente.</p>
-                </div>
-            </section>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <section>
-                <div class="wrap split">
-                    <!-- TROCAR: capa do e-book -->
-                     <img class="photo" src="midia/img/ebook/ebook2.jpeg" alt="Capa do e-book">
-                     <div>
-                        <h2>O que tem dentro</h2>
-                        <ul class="lista">
-                            <li><b>Motivo 1</b>Regras que não cabem na rotina.</li>
-                            <li><b>Motivo 2</b>Restrição que vira exagero.</li>
-                            <li><b>Motivo 3</b>Comer no piloto automático.</li>
-                            <li><b>Motivo 4</b>Culpa como motivação.</li>
-                            <li><b>Motivo 5</b>Plano feito para outra pessoa.</li>
-                        </ul>
-                        <div style="margin-top:1.5rem">
-                            <form class="gate fld">
-                                <label for="g">Seu e-mail libera os materiais</label>
-                                <input id="g" type="email" required placeholder="seu@email.com">
-                                <button class="btn">Liberar</button></form>
-                                <a class="btn" href="midia/materiais/ebook.pdf" download data-locked hidden>Baixar</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
-            <site-footer></site-footer>
-            <contact-popup></contact-popup>
-            <cookie-bar></cookie-bar>
-            <script src="js/components.js"></script>
-            <script src="js/ui.js"></script>
-            <script src="js/pages.js"></script>
-            <script src="js/quiz.js"></script>
-            <script src="js/content.js"></script>
-    </body>
+  <title>E-book gratuito: Por Que a Dieta Não Durou | Helena Vidigal</title>
+  <meta name="description" content="E-book gratuito com os 5 motivos comportamentais pelos quais as dietas terminam e um exercício rápido para descobrir qual deles é o seu.">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body data-page="ebook.html">
+
+  <!-- Componentes de Topo -->
+  <site-header></site-header>
+
+  <!-- Conteúdo Principal -->
+  <main>
+
+    <!-- Cabeçalho da Página -->
+    <section class="phead">
+      <div class="wrap">
+        <h1>Por Que a Dieta Não Durou</h1>
+        <p>E-book gratuito com os 5 motivos comportamentais pelos quais as dietas terminam, e um exercício rápido para você descobrir qual deles é o seu.</p>
+      </div>
+    </section>
+
+    <!-- Capa + conteúdo + liberação -->
+    <section>
+      <div class="wrap split split--foto">
+        <img class="photo photo--capa" src="midia/img/ebook/ebook2.jpeg" alt="Capa do e-book Por Que a Dieta Não Durou">
+
+        <div>
+          <h2>O que tem dentro</h2>
+          <ul class="lista">
+            <li><b>Motivo 1: regras que não cabem na rotina</b>Planos que supõem uma semana ideal quebram na primeira semana real.</li>
+            <li><b>Motivo 2: restrição que vira exagero</b>Proibir costuma aumentar a vontade e transformar um deslize em "já que estraguei, vou comer tudo".</li>
+            <li><b>Motivo 3: comer no piloto automático</b>Parte do que você come é decidida pelo hábito e pelo ambiente, e não pela fome.</li>
+            <li><b>Motivo 4: culpa como motivação</b>Por que punir o deslize costuma alimentar o ciclo, e o que funciona melhor.</li>
+            <li><b>Motivo 5: plano feito para outra pessoa</b>Um cardápio padronizado ignora o seu orçamento, o seu gosto e a sua história.</li>
+          </ul>
+
+          <div style="margin-top: 1.5rem;">
+            <!-- O e-mail libera o download (simulado no navegador, veja js/content.js) -->
+            <form class="gate fld">
+              <label for="g">Digite seu e-mail para liberar o e-book</label>
+              <input id="g" type="email" required placeholder="seu@email.com">
+              <button class="btn">Liberar o e-book</button>
+            </form>
+            <a class="btn" href="midia/materiais/ebook.pdf" data-title="E-book: Por Que a Dieta Não Durou" download data-locked hidden>Baixar o e-book</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Próximo passo depois da leitura (funil) -->
+    <section class="dark cta">
+      <div class="wrap">
+        <h2>Depois de ler, descubra qual motivo é o seu.</h2>
+        <p>O quiz de 6 perguntas aponta a tendência. O Raio-X, em 14 dias de registro, mostra o seu padrão de verdade, com um relatório escrito e uma sessão de 50 minutos.</p>
+        <div class="acoes">
+          <a class="btn" href="quiz.html">Fazer o quiz</a>
+          <a class="btn btn--ghost" href="raio-x.html">Conhecer o Raio-X</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Componentes de Rodapé / Popups -->
+  <site-footer></site-footer>
+  <contact-popup></contact-popup>
+  <cookie-bar></cookie-bar>
+
+  <!-- Scripts -->
+  <script src="js/components.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/content.js"></script>
+
+</body>
 </html>

@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <title>Turma | Helena Vidigal, Nutrição Comportamental</title>
-  <meta name="description" content="Turma de 8 pessoas por ciclo: o método Raio-X, Ajuste e Sustento in grupo.">
-  
+
+  <title>Turma de 8 pessoas | Helena Vidigal, Nutrição Comportamental</title>
+  <meta name="description" content="Turma de 8 pessoas: o mesmo método do Programa de 90 dias (Raio-X, Ajuste e Sustento), em grupo, por R$ 697,00.">
+
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
-  
+
   <!-- Estilos -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/pages.css">
@@ -25,42 +25,135 @@
   <!-- Conteúdo Principal -->
   <main>
 
-    <!-- Cabeçalho da Página -->
+    <!-- 1. Cabeçalho da página -->
     <section class="phead">
       <div class="wrap">
-        <h1>Oito vagas por ciclo.</h1>
-        <p>O mesmo método do programa, em grupo, com a troca de quem está no mesmo caminho.</p>
+        <h1>O mesmo método, com mais 7 pessoas ao seu lado.</h1>
+        <p>A Turma é o Programa de 90 dias em grupo: as mesmas três fases, encontros semanais por vídeo e a troca com quem tropeça nos mesmos pontos que você. <strong>R$ 697,00</strong> no ciclo de 12 semanas.</p>
+
+        <div class="acoes">
+          <a class="btn" href="#reserva">Reservar meu lugar</a>
+          <a class="btn btn--ghost" href="programa.html">Comparar com o Programa individual</a>
+        </div>
       </div>
     </section>
 
-    <!-- Status de Vagas e Formulário de Espera -->
+    <!-- 2. Como funciona + vagas -->
     <section>
       <div class="wrap split">
-        <!-- Indicador de Vagas Ocupadas/Disponíveis -->
         <div>
-          <h2>Restam <span data-restam>5</span> vagas neste mês</h2>
-          <div id="dots" class="dots" aria-hidden="true"></div>
-          
-          <p>Círculos preenchidos são vagas já ocupadas. <strong>R$ 697</strong> no ciclo de 12 semanas.</p>
+          <h2>Como funciona a Turma</h2>
+          <ul class="lista reveal">
+            <li>
+              <b>Grupo fechado de 8 pessoas</b>
+              Todas começam juntas e passam pelas três fases ao mesmo tempo: Raio-X, Ajuste e Sustento.
+            </li>
+            <li>
+              <b>Raio-X individual</b>
+              Cada pessoa faz os 14 dias de registro e recebe o seu próprio relatório. O que você registra não é exposto ao grupo.
+            </li>
+            <li>
+              <b>Encontros semanais por vídeo</b>
+              A Helena conduz a fase da semana, mostra como adaptar o plano e tira dúvidas. O que é dito no grupo fica no grupo.
+            </li>
+            <li>
+              <b>Cardápio por Cenário e Kit SOS</b>
+              Os mesmos materiais do Programa, para você adaptar à sua rotina.
+            </li>
+          </ul>
         </div>
 
-        <!-- Formulário de Conversão -->
         <div class="reveal">
-          <h2>Entre na lista de espera</h2>
-          <form class="fld js-form">
-            <label for="n">Nome</label>
-            <input id="n" required minlength="3">
-            
-            <label for="t">WhatsApp</label>
-            <input id="t" required inputmode="tel" placeholder="(11) 99999-9999">
-            
-            <label for="o">Atendimento</label>
-            <select id="o">
-              <option>Online</option>
-              <option>Presencial em Osasco</option>
+          <h2>Restam <span data-turma-restam>5</span> lugares neste ciclo</h2>
+          <div id="dots" class="dots" aria-hidden="true"></div>
+          <p>Círculos preenchidos são lugares já ocupados. O grupo fecha em <span data-turma-total>8</span> pessoas, porque é esse o tamanho em que todo mundo ainda é ouvido.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Turma ou Programa individual? -->
+    <section class="dark">
+      <div class="wrap">
+        <h2>Turma ou Programa individual?</h2>
+
+        <div class="split" style="align-items: start;">
+          <div class="reveal">
+            <h3>Escolha a Turma se</h3>
+            <ul class="checks">
+              <li>Você aprende melhor trocando experiência com outras pessoas</li>
+              <li>Quer o método completo com um investimento menor (R$ 697,00)</li>
+              <li>Não precisa de um acompanhamento só seu, por áudio, toda semana</li>
+            </ul>
+          </div>
+
+          <div class="reveal">
+            <h3>Escolha o Programa individual se</h3>
+            <ul class="checks">
+              <li>Quer atenção individual a cada semana, com a Mesa de Apoio por áudio</li>
+              <li>Sua rotina é muito particular (turnos, viagens frequentes, condição clínica)</li>
+              <li>Prefere não compartilhar o que registra e o que sente</li>
+            </ul>
+            <p style="margin-top: 1rem;"><a href="programa.html">Ver o Programa de 90 dias →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Dúvidas -->
+    <section>
+      <div class="wrap">
+        <h2>Dúvidas sobre a Turma</h2>
+
+        <details>
+          <summary>Preciso fazer o Raio-X antes?</summary>
+          <p>Ele já faz parte da Turma. Você começa pelos 14 dias de registro e pelo seu relatório, como em todos os planos, e só depois entra no Ajuste.</p>
+        </details>
+
+        <details>
+          <summary>O que eu preciso compartilhar com o grupo?</summary>
+          <p>Só o que você quiser. O registro e o relatório são individuais, e o grupo combina desde o primeiro encontro que o que é dito ali não sai dali.</p>
+        </details>
+
+        <details>
+          <summary>A Turma é online?</summary>
+          <p>Sim. Os encontros são por vídeo, então você participa de onde estiver.</p>
+        </details>
+
+        <details>
+          <summary>A Turma promete emagrecimento?</summary>
+          <p>Não. Assim como no Programa individual, a promessa é método, acompanhamento e um plano que cabe na sua rotina.</p>
+        </details>
+
+        <details>
+          <summary>Qual é a diferença para o Programa individual?</summary>
+          <p>O método é o mesmo. No Programa individual, o plano e a Mesa de Apoio (check-in semanal por áudio) são só seus. Na Turma, o acompanhamento é compartilhado com o grupo, e por isso custa menos.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 5. Reservar o lugar -->
+    <section class="olive" id="reserva">
+      <div class="wrap split">
+        <div class="reveal">
+          <h2>Reserve o seu lugar</h2>
+          <p>Preencha ao lado. A Helena chama você no WhatsApp, confirma se ainda há lugar no ciclo e envia o link de pagamento dos R$ 697,00.</p>
+        </div>
+
+        <div class="reveal">
+          <form class="fld js-form" data-ok="Recebi o seu pedido. A Helena chama você no WhatsApp para confirmar o seu lugar na Turma.">
+            <label for="tm-nome">Nome</label>
+            <input id="tm-nome" required minlength="3" autocomplete="name">
+
+            <label for="tm-tel">WhatsApp</label>
+            <input id="tm-tel" required inputmode="tel" placeholder="(11) 99999-9999" autocomplete="tel">
+
+            <label for="tm-aten">Como prefere conversar?</label>
+            <select id="tm-aten">
+              <option>Por WhatsApp</option>
+              <option>Por ligação</option>
             </select>
-            
-            <button class="btn">Entrar na lista</button>
+
+            <button class="btn">Reservar meu lugar</button>
           </form>
         </div>
       </div>

@@ -3,19 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <title>Kit SOS | Helena Vidigal, Nutrição Comportamental</title>
-  <meta name="description" content="Prévia do Kit SOS: planos para fome emocional, jantar fora e escorreguei.">
-  
+
+  <title>Kit SOS: o que fazer na fome emocional, no jantar fora e quando escorrega | Helena Vidigal</title>
+  <meta name="description" content="Prévia do Kit SOS do Programa de 90 dias: roteiros passo a passo para fome emocional, jantar fora e o dia em que você escorregou, mais um termômetro de fome e saciedade.">
+
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
-  
+
   <!-- Estilos -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/pages2.css">
 </head>
 
 <body data-page="kit-sos.html">
@@ -25,12 +24,12 @@
 
   <!-- Conteúdo Principal -->
   <main>
-    
+
     <!-- Cabeçalho da Página -->
     <section class="phead">
       <div class="wrap">
-        <h1>Kit SOS</h1>
-        <p>Uma prévia do que vem no programa: planos para os momentos difíceis.</p>
+        <h1>Kit SOS: um roteiro para o momento difícil.</h1>
+        <p>É difícil decidir bem no meio da fome emocional, do jantar fora ou do dia em que o plano escorregou. O Kit SOS deixa o roteiro pronto antes, para você só seguir. Esta página mostra uma prévia dos três planos que fazem parte do Programa de 90 dias.</p>
       </div>
     </section>
 
@@ -38,8 +37,8 @@
     <section>
       <div class="wrap">
         <h2>Termômetro de fome e saciedade</h2>
-        <p>Arraste de 1 (muita fome) a 10 (muito cheia).</p>
-        
+        <p>Antes de comer, e de novo no meio da refeição, arraste de 1 (muita fome) a 10 (muito cheia) para ver onde você está.</p>
+
         <input id="termo" class="termo" type="range" min="1" max="10" value="5" aria-label="Nível de fome">
         <p id="termo-msg" aria-live="polite"></p>
       </div>
@@ -48,26 +47,48 @@
     <!-- Planos de Emergência Expansíveis -->
     <section class="dark">
       <div class="wrap">
-        <h2>Três planos de emergência</h2>
-        
+        <h2>Três planos para os momentos difíceis</h2>
+
         <details>
           <summary>Bateu fome emocional</summary>
-          <p>Pare por 5 minutos. Nomeie o que sente. Pergunte se é fome física. Se quiser comer, coma sentada, sem tela.</p>
+          <ol>
+            <li>Pare por 5 minutos antes de comer. Marque no relógio.</li>
+            <li>Pergunte: quando foi a minha última refeição? Se faz muitas horas, o corpo pode estar pedindo comida de verdade.</li>
+            <li>Nomeie o que você sente em uma frase, por exemplo: "estou cansada e frustrada".</li>
+            <li>Decida. Se a escolha for comer, coma sentada, em um prato, sem tela.</li>
+            <li>Anote em uma linha o que aconteceu, sem julgar. Isso vira material para o seu plano.</li>
+          </ol>
+          <p>Se isso acontece com frequência, com sensação de perda de controle ou sofrimento intenso depois, converse com a Helena e com um profissional de saúde mental.</p>
         </details>
-        
+
         <details>
           <summary>Jantar fora</summary>
-          <p>Não chegue com muita fome. Escolha o que mais quer. Coma devagar e pare quando estiver confortável.</p>
+          <ol>
+            <li>Não chegue com muita fome: faça um lanche leve antes de sair.</li>
+            <li>Se puder, veja o cardápio com antecedência e escolha o que você mais quer.</li>
+            <li>Coma devagar e pouse o garfo entre as garfadas para sentir a saciedade chegando.</li>
+            <li>Pare quando estiver confortável. O que sobrou pode ir para a viagem.</li>
+            <li>Quer sobremesa? Peça uma para dividir e aproveite sem pressa.</li>
+          </ol>
         </details>
-        
+
         <details>
           <summary>Escorreguei</summary>
-          <p>Nada de compensar. Beba água, faça a próxima refeição normalmente e registre o que aconteceu, sem julgamento.</p>
+          <ol>
+            <li>Nada de compensar: sem jejum e sem treino de castigo.</li>
+            <li>Beba água e faça a próxima refeição no horário normal.</li>
+            <li>Registre em três linhas onde você estava, a que horas foi e o que sentia.</li>
+            <li>Troque a culpa por uma pergunta: "do que eu precisava naquele momento?"</li>
+            <li>Leve a resposta para a conversa semanal com a Helena, na Mesa de Apoio.</li>
+          </ol>
         </details>
-        
-        <p style="margin-top: 1.5rem;">
-          <a class="btn" href="programa.html">Ver o programa completo</a>
-        </p>
+
+        <p style="margin-top: 1.5rem;">Estes roteiros são genéricos. No Programa, cada um é ajustado ao que o seu Raio-X mostrou sobre os seus gatilhos e horários de risco.</p>
+
+        <div class="acoes">
+          <a class="btn" href="programa.html">Ver o Programa completo</a>
+          <a class="btn btn--ghost" href="raio-x.html">Começar pelo Raio-X</a>
+        </div>
       </div>
     </section>
 
@@ -81,8 +102,6 @@
   <!-- Scripts -->
   <script src="js/components.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/pages.js"></script>
-  <script src="js/quiz.js"></script>
   <script src="js/content.js"></script>
 
 </body>
