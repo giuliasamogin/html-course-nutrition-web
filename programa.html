@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <title>Programa de 90 dias | Helena Vidigal, Nutrição Comportamental</title>
-  <meta name="description" content="Raio-X, Ajuste e Sustento: o programa de nutrição comportamental de 90 dias.">
-  
+  <meta name="description" content="Programa de 90 dias de nutrição comportamental: diagnóstico, plano por cenário e acompanhamento semanal por áudio. Comece pelo Raio-X.">
+
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
-  
+
   <!-- Estilos -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/pages.css">
@@ -28,33 +28,57 @@
     <!-- Cabeçalho da Página -->
     <section class="phead">
       <div class="wrap">
-        <h1>90 dias para comer sem guerra.</h1>
-        <p>Um programa em três fases. Na primeira, você não muda nada no prato.</p>
+        <h1>90 dias para parar de recomeçar.</h1>
+        <p>Um programa em três fases: primeiro você entende o seu padrão, depois ganha um plano que cabe na sua semana, por fim aprende a se ajustar sozinha. A primeira fase não tem dieta.</p>
+      </div>
+    </section>
+
+    <!-- Para quem é / para quem não é -->
+    <section>
+      <div class="wrap split">
+        <div class="reveal">
+          <h2>O programa é para você se</h2>
+          <ul class="checks">
+            <li>Você já começou várias dietas e nenhuma durou além das primeiras semanas</li>
+            <li>Sabe o que deveria comer, mas não consegue sustentar no dia a dia</li>
+            <li>Sua rotina muda muito (trabalho, fim de semana social, viagens, TPM)</li>
+            <li>Quer um acompanhamento de verdade, não um PDF de cardápio</li>
+          </ul>
+        </div>
+
+        <div class="reveal">
+          <h2>E não é para você se</h2>
+          <ul class="checks">
+            <li>Procura uma dieta pronta com meta de quilos em prazo fixo</li>
+            <li>Não pretende registrar sua alimentação por duas semanas</li>
+            <li>Espera resolver tudo sem conversar sobre a sua rotina e os seus gatilhos</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- Seção: As Três Fases -->
     <section class="dark">
       <div class="wrap">
-        <h2>As três fases</h2>
-        
+        <h2>O que acontece em cada fase</h2>
+
         <div class="steps">
           <div class="step">
             <h3>Raio-X</h3>
             <em>Semanas 1 e 2</em>
-            <p>Diário sem calorias, mapa de gatilhos e entrega do Raio-X Comportamental.</p>
+            <p>Registro guiado pelo celular, sem calorias e sem cortes. A Helena mapeia seus gatilhos e horários de risco e entrega o Raio-X Comportamental numa sessão devolutiva de 50 minutos.</p>
           </div>
-          
+
           <div class="step">
             <h3>Ajuste</h3>
             <em>Semanas 3 a 8</em>
-            <p>Seu plano nasce do seu comportamento real, com o Cardápio por Cenário.</p>
+            <p>Seu plano nasce do que o Raio-X mostrou. Você recebe o Cardápio por Cenário e o Kit SOS, e ajusta tudo com a Helena toda semana, por áudio.</p>
           </div>
-          
+
           <div class="step">
             <h3>Sustento</h3>
             <em>Semanas 9 a 12</em>
-            <p>Você aprende a se ajustar sozinha e leva o Manual Pessoal.</p>
+            <p>A Helena diminui o suporte aos poucos, para você ganhar autonomia. Você termina com o Manual Pessoal e a opção de seguir com o acompanhamento mensal ou anual.</p>
           </div>
         </div>
       </div>
@@ -64,15 +88,15 @@
     <section class="dark" style="padding-top: 0;">
       <div class="wrap">
         <h2>Cardápio por Cenário</h2>
-        <p>Escolha uma situação e veja como o plano se adapta.</p>
-        
+        <p>Um único cardápio não sobrevive a uma semana real. Escolha uma situação e veja como o plano se adapta.</p>
+
         <div class="scen">
           <button data-c="corrido" aria-pressed="true">Dia corrido</button>
           <button data-c="social" aria-pressed="false">Fim de semana social</button>
           <button data-c="tpm" aria-pressed="false">TPM</button>
           <button data-c="viagem" aria-pressed="false">Viagem</button>
         </div>
-        
+
         <div id="scen-out" class="scen-out" aria-live="polite">
           <h3>Dia corrido</h3>
           <p>Café em 5 minutos: pão integral, ovo mexido e fruta. Almoço: marmita montada no domingo (base, proteína e legumes). Lanche: iogurte com castanhas. Jantar: omelete com salada ou sopa.</p>
@@ -83,42 +107,113 @@
     <!-- Seção Comercial: Entregáveis e Preço -->
     <section>
       <div class="wrap split">
-        <!-- Lista de Benefícios -->
+        <!-- Lista de entregáveis -->
         <div>
           <h2>O que você recebe</h2>
           <ul class="lista reveal">
             <li>
               <b>Raio-X Comportamental</b>
-              Documento visual com seus gatilhos e padrões.
+              Relatório escrito com seus gatilhos, horários de risco e padrões, mais uma sessão devolutiva de 50 minutos.
             </li>
             <li>
               <b>Cardápio por Cenário</b>
-              Versões do plano para cada situação da sua semana.
+              Versões do plano para dia corrido, fim de semana social, TPM e viagem.
             </li>
             <li>
               <b>Kit SOS</b>
-              Planos para fome emocional, jantar fora e "escorreguei".
+              Planos prontos para fome emocional, jantar fora e para o dia em que você "escorregou".
             </li>
             <li>
               <b>Mesa de Apoio</b>
-              Check-in semanal por áudio no WhatsApp.
+              Check-in semanal por áudio no WhatsApp, com ajustes no plano.
             </li>
             <li>
               <b>Manual Pessoal</b>
-              Guia de bolso com as regras que funcionam para você.
+              Guia de bolso com as regras que funcionam para você, para usar depois dos 90 dias.
             </li>
           </ul>
         </div>
-        
-        <!-- Bloco de Preço / Conversão -->
+
+        <!-- Bloco de preço / conversão -->
         <div class="reveal">
-          <p class="price">R$ 1.497</p>
-          <p>ou 3x no cartão. Inclui Garantia de Ajuste: se o plano não encaixar na sua rotina nos primeiros 15 dias, eu refaço sem custo.</p>
-          
-          <p style="margin-top: 1.4rem;">
+          <article class="plan plan--top">
+            <span class="plan__tag">Programa de 90 dias</span>
+            <p class="plan__price">R$ 1.497,00</p>
+            <p class="plan__note">ou 3x de R$ 499,00</p>
+            <ul class="checks">
+              <li>Raio-X completo incluído</li>
+              <li>12 semanas de acompanhamento</li>
+              <li>Os R$ 147,00 do Raio-X são abatidos se você já o tiver feito (em até 7 dias)</li>
+              <li>Garantia de Ajuste: se o plano não encaixar nos primeiros 15 dias, a Helena o refaz sem custo</li>
+            </ul>
             <a class="btn" href="raio-x.html">Começar pelo Raio-X</a>
-          </p>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- Como contratar -->
+    <section class="olive">
+      <div class="wrap">
+        <h2>Como começar, sem risco de pagar por algo errado</h2>
+
+        <div class="steps">
+          <div class="step">
+            <h3>Faça o Raio-X</h3>
+            <p>Por R$ 147,00, você passa 14 dias com o registro guiado e recebe seu relatório.</p>
+          </div>
+
+          <div class="step">
+            <h3>Veja o seu padrão</h3>
+            <p>Na sessão devolutiva, a Helena mostra o que o Raio-X revelou e como o plano seria.</p>
+          </div>
+
+          <div class="step">
+            <h3>Decida com clareza</h3>
+            <p>Se seguir em frente em até 7 dias, o valor do Raio-X é abatido do Programa. Se não, você leva o relatório.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <div class="wrap">
+        <h2>Dúvidas sobre o programa</h2>
+
+        <details>
+          <summary>Preciso fazer o Raio-X antes de contratar o programa?</summary>
+          <p>Sim. É o Raio-X que permite montar um plano seu, e não um cardápio genérico. O valor dele é abatido do Programa se você contratar em até 7 dias.</p>
+        </details>
+
+        <details>
+          <summary>Quanto tempo por dia o programa exige?</summary>
+          <p>No Raio-X, poucos minutos por dia para registrar sua alimentação. Depois, o check-in semanal por áudio com a Helena.</p>
+        </details>
+
+        <details>
+          <summary>O que acontece depois dos 90 dias?</summary>
+          <p>Você leva o Manual Pessoal e pode escolher entre seguir sozinha ou continuar com o acompanhamento mensal (R$ 197,00 por mês) ou anual (R$ 1.970,00 por ano).</p>
+        </details>
+
+        <details>
+          <summary>O programa promete emagrecimento?</summary>
+          <p>Não. A promessa é método, acompanhamento e um plano que cabe na sua vida. É isso que sustenta qualquer mudança no longo prazo.</p>
+        </details>
+
+        <details>
+          <summary>Posso fazer online?</summary>
+          <p>Sim. As sessões são por vídeo e o acompanhamento é por áudio. Em Osasco, também há atendimento presencial.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="dark cta">
+      <div class="wrap">
+        <h2>Comece pelo Raio-X.</h2>
+        <p>Em 14 dias você entende o seu padrão, e o valor é abatido do Programa se você seguir em frente.</p>
+        <a class="btn" href="raio-x.html">Quero meu Raio-X</a>
       </div>
     </section>
 
