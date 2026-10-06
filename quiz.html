@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Quiz | Helena Vidigal, Nutrição Comportamental</title>
+  <meta name="description" content="Descubra seu perfil alimentar em 6 perguntas e baixe seu cartão.">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body data-page="quiz.html">
+
+  <!-- Componentes de Topo -->
+  <site-header></site-header>
+
+  <!-- Conteúdo Principal -->
+  <main>
+
+    <!-- Cabeçalho da Página -->
+    <section class="phead">
+      <div class="wrap">
+        <h1>Qual é a sua relação com a comida?</h1>
+        <p>Seis perguntas, um perfil e um cartão para guardar ou compartilhar.</p>
+      </div>
+    </section>
+
+    <!-- Quiz (esquerda) + arte (direita) -->
+    <section>
+      <div class="wrap qz-layout">
+
+        <div id="quiz" class="qz" aria-live="polite"></div>
+
+        <!-- Arte: salve como midia/img/quiz/quiz-arte.png (1200 x 1500 px, proporção 4:5).
+             Enquanto o arquivo não existir, aparece uma moldura creme com o texto "Espaço da arte". -->
+        <figure class="qz-art">
+          <img src="midia/desenho/desenho1.jpeg" alt="">
+        </figure>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Componentes de Rodapé / Popups -->
+  <site-footer></site-footer>
+  <contact-popup></contact-popup>
+  <cookie-bar></cookie-bar>
+
+  <!-- Scripts -->
+  <script src="js/components.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/quiz.js"></script>
+
+</body>
+</html>
