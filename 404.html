@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- O <base> faz TODOS os caminhos abaixo (e os do components.js) partirem da raiz do site,
-       mesmo quando o link quebrado é algo como /blog/xyz. Deve ser o primeiro item do <head>.
-       Se o site ficar numa subpasta (ex.: usuario.github.io/nome-do-repo/), troque por
-       <base href="/nome-do-repo/"> -->
-  <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
@@ -30,21 +25,27 @@
   <main>
     <section class="e404">
       <div class="wrap">
-        <p class="e404__num" aria-hidden="true">404</p>
+        
+        <!-- Imagem personalizada do 404 -->
+        <div class="e404__img-container">
+          <img src="midia/erro/404.jpeg" alt="Página não encontrada - 404 Helena Vidigal" class="e404__img">
+        </div>
+
         <h1>Essa página saiu do cardápio</h1>
         <p>O link que você abriu não existe mais ou foi digitado errado. Volte para o início ou escolha uma destas páginas.</p>
 
-        <p class="e404__acoes">
+        <div class="e404__acoes">
           <a class="btn" href="index.html">Voltar ao início</a>
           <a class="btn btn--ghost" href="blog.html">Ler o blog</a>
-        </p>
+        </div>
 
-        <p class="e404__links">
+        <div class="e404__links">
           <a href="quiz.html">Quiz</a>
           <a href="receitas.html">Receitas</a>
           <a href="biblioteca.html">Biblioteca</a>
           <a href="contato.html">Contato</a>
-        </p>
+        </div>
+
       </div>
     </section>
   </main>

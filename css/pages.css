@@ -914,3 +914,65 @@ body.reader-open .fab {
 .e404__links a {
   margin: 0 0.4rem;
 }
+
+/* ---------- Estilização da Página 404 (Imagem Expandida) ---------- */
+.e404 {
+  padding: 20px 20px 60px;
+  text-align: center;
+}
+
+.e404 .wrap {
+  max-width: 1200px; /* Permite que o contêiner se expanda bem na tela */
+  margin: 0 auto;
+}
+
+.e404__img-container {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.e404__img {
+  width: 100%;
+  max-width: 1100px; /* Aumenta a imagem significativamente */
+  height: auto;      /* Mantém a proporção original sem cortar */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.e404 h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  color: #333;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.e404 p {
+  color: #666;
+  font-size: 1.05rem;
+  margin-bottom: 24px;
+}
+
+.e404__acoes {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.e404__links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.e404__links a {
+  color: #8c6239;
+  text-decoration: none;
+  font-weight: 500;
+}
