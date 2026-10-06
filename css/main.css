@@ -47,9 +47,9 @@
   --altura-util: calc(100svh - var(--h-faixa) - var(--h-nav));
   --h-marquee: 2.6rem;                         /* faixa amarela de credenciais */
   --hero-h: calc(var(--altura-util) - var(--h-marquee));
-  /* respiro vertical das seções: o mínimo de 3rem garante que o conteúdo nunca
-     fique "espremido" entre o menu fixo e a seção seguinte, mesmo em janela baixa */
-  --pad-sec: clamp(3rem, 8svh, 5.5rem);
+  /* respiro vertical das seções: proporcional à altura da janela, para cada
+     seção caber inteira na tela (antes o mínimo de 3rem estourava a altura) */
+  --pad-sec: clamp(1.25rem, 4.5svh, 3.5rem);
 
   /* altura das fotos de destaque: preenche a altura útil, entre 300 e 760px */
   --foto-h: clamp(300px, calc(var(--altura-util) - 2 * var(--pad-sec)), 760px);
@@ -119,8 +119,8 @@ h1 {
 }
 
 h2 {
-  margin-bottom: 1.2rem;
-  font-size: clamp(1.5rem, min(3.6vw, 6.5svh), 2.6rem);
+  margin-bottom: clamp(0.5rem, 1.6svh, 1rem);
+  font-size: clamp(1.35rem, min(3vw, 5svh), 2.2rem);
 }
 
 h3 {
@@ -175,11 +175,12 @@ main > section {
 
 /* FOTOS EM RETRATO: a altura é a altura útil da tela (--foto-h) e a
    LARGURA vem da altura × --k (proporção largura/altura).
-   --k: .8  = 4:5 (padrão)   |   --k: .75 = 3:4 (capa de e-book)
+   --k: .85 = proporção padrão (um pouco mais larga que 4:5, foto maior)
+   --k: .75 = 3:4 (capa de e-book)
    object-fit: cover nunca estica; object-position protege o rosto
    (foco no terço de cima). Ajuste --foco numa foto específica se precisar. */
 .photo {
-  --k: 0.8;
+  --k: 0.85;
   width: min(calc(var(--foto-h) * var(--k)), 100%);
   height: var(--foto-h);
   justify-self: center;
@@ -192,6 +193,14 @@ main > section {
 .photo--capa {
   --k: 0.75;
   --foco: 50% 50%;
+}
+
+/* foto em paisagem (ex.: consultório, com aspect-ratio inline):
+   largura da coluna, altura automática, sem passar da altura útil */
+.photo[style*="aspect-ratio"] {
+  width: 100%;
+  height: auto;
+  max-height: calc(var(--altura-util) - 2 * var(--pad-sec));
 }
 
 
@@ -909,7 +918,7 @@ dialog input:invalid:not(:placeholder-shown) {
 
 .step {
   position: relative;
-  padding-top: 4rem;
+  padding-top: clamp(3rem, 7svh, 4rem);
 }
 
 .step::before {
@@ -977,7 +986,7 @@ dialog input:invalid:not(:placeholder-shown) {
 
 .checks li {
   position: relative;
-  padding: 0.4rem 0 0.4rem 1.7rem;
+  padding: clamp(0.2rem, 0.8svh, 0.4rem) 0 clamp(0.2rem, 0.8svh, 0.4rem) 1.7rem;
 }
 
 .checks li::before {
@@ -989,20 +998,24 @@ dialog input:invalid:not(:placeholder-shown) {
 }
 
 
-/* ----- planos (colunas) ----- */
+/* ----- planos (colunas) -----
+   Tamanhos acompanham a altura da janela (svh) para os 4 planos
+   caberem inteiros na tela, com o botão visível. */
 .plans {
+  padding: clamp(1rem, 3svh, 2.5rem) 0 !important;
   background: var(--paper);
 }
 
 .plans > .wrap > p {
   margin-bottom: 0;
+  font-size: clamp(0.9rem, 2.2svh, 1.05rem);
 }
 
 .plans__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.2rem;
-  margin-top: 2.4rem;
+  gap: clamp(0.7rem, 1.2vw, 1.1rem);
+  margin-top: clamp(0.9rem, 3svh, 1.8rem);
   align-items: stretch;
 }
 
@@ -1010,11 +1023,15 @@ dialog input:invalid:not(:placeholder-shown) {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1.8rem 1.4rem 1.6rem;
+  padding: clamp(1rem, 2.6svh, 1.6rem) clamp(0.9rem, 1.2vw, 1.3rem);
   border: 2px solid var(--line);
   border-radius: var(--r);
   background: #fff;
   color: var(--ink);
+}
+
+.plan h3 {
+  font-size: clamp(1.05rem, 2.8svh, 1.3rem);
 }
 
 .plan--top {
@@ -1041,16 +1058,17 @@ dialog input:invalid:not(:placeholder-shown) {
 
 .plan__for {
   min-height: 4.2em;
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
   color: var(--olive);
-  font-size: 0.92rem;
+  font-size: clamp(0.8rem, 2svh, 0.9rem);
+  line-height: 1.4;
 }
 
 .plan__price {
-  margin-top: 1rem;
-  /* o tamanho acompanha a largura da janela e o preço nunca quebra em duas
-     linhas (antes "R$ 1.970,00/ano" quebrava no plano anual) */
-  font: 700 clamp(1.5rem, 2vw, 2.1rem) / 1.05 var(--serif);
+  margin-top: clamp(0.4rem, 1.4svh, 0.9rem);
+  /* o tamanho acompanha a largura E a altura da janela e o preço nunca quebra
+     em duas linhas (antes "R$ 1.970,00/ano" quebrava no plano anual) */
+  font: 700 clamp(1.3rem, min(3.6svh, 2vw), 1.9rem) / 1.05 var(--serif);
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
@@ -1062,26 +1080,34 @@ dialog input:invalid:not(:placeholder-shown) {
 }
 
 .plan__note {
-  min-height: 2.6em;
+  min-height: 2.8em;
   margin-top: 0.4rem;
   color: #6b6458;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 .plan .checks {
   flex: 1;
-  margin: 1.1rem 0 1.5rem;
-  padding-top: 0.9rem;
+  margin: clamp(0.5rem, 1.4svh, 1rem) 0 clamp(0.7rem, 2svh, 1.2rem);
+  padding-top: clamp(0.4rem, 1.2svh, 0.8rem);
   border-top: 1px solid var(--line);
-  font-size: 0.93rem;
+  font-size: clamp(0.8rem, 2svh, 0.9rem);
+  line-height: 1.4;
+}
+
+.plan .checks li {
+  padding-block: clamp(0.15rem, 0.6svh, 0.3rem);
 }
 
 .plan .btn {
+  padding: clamp(0.6rem, 1.6svh, 0.85rem) 1rem;
+  font-size: clamp(0.85rem, 2svh, 0.95rem);
   text-align: center;
 }
 
 .plans__alt {
-  margin-top: 1.8rem;
+  margin-top: clamp(0.8rem, 2svh, 1.8rem);
 }
 
 
@@ -1102,12 +1128,12 @@ dialog input:invalid:not(:placeholder-shown) {
 }
 
 details {
-  padding: 1.1rem 0;
+  padding: clamp(0.6rem, 1.6svh, 1rem) 0;
   border-bottom: 2px solid var(--line);
 }
 
 summary {
-  font: 700 1.25rem var(--serif);
+  font: 700 clamp(1rem, 2.6svh, 1.2rem) var(--serif);
   cursor: pointer;
 }
 
@@ -1137,6 +1163,13 @@ details p {
   transform: none;
 }
 
+/* fotos sempre visíveis (antes ficavam invisíveis até a rolagem disparar,
+   o que deixava um buraco vazio ao lado do texto) */
+.js .photo.reveal {
+  opacity: 1;
+  transform: none;
+}
+
 
 /* ---------- 7. RESPONSIVO ---------- */
 
@@ -1149,7 +1182,7 @@ details p {
 
   /* com 2 colunas há espaço de sobra: o preço volta ao tamanho cheio */
   .plan__price {
-    font-size: 2.1rem;
+    font-size: clamp(1.4rem, 3.6svh, 2rem);
   }
 }
 
