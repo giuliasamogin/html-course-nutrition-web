@@ -16,6 +16,7 @@
    7. Registro dos componentes
    8. Favicon
    9. Leitor de PDF (carrega js/reader.js)
+   10. Bonequinha (carrega js/boneca.js)
    ========================================================== */
 
 
@@ -149,13 +150,13 @@ class SiteFooter extends HTMLElement {
 
 
 /* ---------- 5. POPUP DE CONTATO ----------
-   Botão flutuante + <dialog> nativo (Esc fecha, foco tratado pelo navegador).
-   Qualquer elemento com [data-open-contact] abre o popup. */
+   <dialog> nativo (Esc fecha, foco tratado pelo navegador).
+   Qualquer elemento com [data-open-contact] abre o popup.
+   O botão flutuante agora é a bonequinha (js/boneca.js), que já
+   nasce com o atributo [data-open-contact]. */
 class ContactPopup extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <button class="btn fab" data-open-contact>Fale comigo</button>
-
       <dialog id="contato" aria-labelledby="ct">
         <form method="dialog">
           <button class="x" aria-label="Fechar">×</button>
@@ -192,28 +193,10 @@ class ContactPopup extends HTMLElement {
     const tel = form.querySelector('#t');
     const erro = form.querySelector('#e');
 
-    // abre o popup ao clicar em qualquer [data-open-contact]
+    // abre o popup ao clicar em qualquer [data-open-contact] (inclui a bonequinha)
     document.addEventListener('click', (ev) => {
       if (ev.target.closest('[data-open-contact]')) dialog.showModal();
     });
-
-    // o botão "Fale comigo" se recolhe ao rolar para baixo (para não cobrir
-    // o texto) e volta ao rolar para cima, no topo e no fim da página
-    const fab = this.querySelector('.fab');
-    let ultimoY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      const descendo = y > ultimoY + 4;
-      const subindo = y < ultimoY - 4;
-      const noTopo = y < 240;
-      const noFim = window.innerHeight + y > document.documentElement.scrollHeight - 320;
-
-      if (noTopo || noFim || subindo) fab.classList.remove('fab--hide');
-      else if (descendo) fab.classList.add('fab--hide');
-
-      ultimoY = y;
-    }, { passive: true });
 
     // clique fora da caixa fecha
     dialog.addEventListener('click', (ev) => {
@@ -308,4 +291,15 @@ customElements.define('cookie-bar', CookieBar);
   const leitor = document.createElement('script');
   leitor.src = 'js/reader.js';
   document.body.appendChild(leitor);
+})();
+
+
+/* ---------- 10. BONEQUINHA ----------
+   Carrega js/boneca.js em todas as páginas: ela é o botão flutuante que
+   abre o popup de contato. Se você já colocou <script src="js/boneca.js">
+   nos HTMLs, pode tirar: o boneca.js ignora a segunda carga. */
+(function () {
+  const boneca = document.createElement('script');
+  boneca.src = 'js/boneca.js';
+  document.body.appendChild(boneca);
 })();
